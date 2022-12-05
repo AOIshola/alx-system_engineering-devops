@@ -1,0 +1,1 @@
+Script prints "Hell, World"
