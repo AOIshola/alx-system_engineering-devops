@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -a | find . -type d -empty
+ls -a | find . -type d -path './*' -empty
