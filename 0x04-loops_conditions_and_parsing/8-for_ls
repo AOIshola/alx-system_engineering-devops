@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # This script prints the files in a directory"
 
-for file in $(find . -type f -name "[!.]*" | sed 's/.*-//')
+for file in $(find . -type f,d -not -name "[.]*" | sed 's/.*-//')
 do
 	echo "$file"
 done
