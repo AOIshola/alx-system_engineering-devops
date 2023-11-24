@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# This script reads a file
+
+while IFS=: read -r USERNAME PASSWORD USER_ID GROUP_ID USERID_I HOME_DIRECTORY COMMAND
+do
+	echo "The user $USERNAME is part of the $GROUP_ID gang, lives in $HOME_DIRECTORY and rides $COMMAND. $USER_ID's place is protected by the passcode $PASSWORD, more info about the user here: $USERID_I"
+done < "/etc/passwd"
