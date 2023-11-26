@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # This script displays all running processes
 
-ps -euf --forest
+ps -u --forest
