@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This script prints infinitely
+
+#pid="$(ps aux | grep 7-highlander | grep -v grep | awk '{print $2}')"
+pkill -f -9 7-highlander
