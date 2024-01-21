@@ -1,0 +1,5 @@
+Host alx-server
+    HostName 100.26.236.29
+    User ubuntu
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no
