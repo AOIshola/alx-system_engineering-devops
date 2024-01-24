@@ -11,6 +11,7 @@ sudo apt-get install -y nginx
 # appropriate content
 
 echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+echo "301 Moved Permanently" | sudo tee /var/www/html/redirect_me.html > /dev/null
 
 echo "server {
 	listen 80;
@@ -29,7 +30,7 @@ NGINX="/etc/nginx/sites-available/default"
 
 sudo cp "$NGINX" "$NGINX.bak"
 
-sed -i "/server_name*;/a \ \ \ \ location \/redirect_me {\n \ \ \ \ \ \ \ return 301 $DIR;\n \ \ \ \ \ }\n" "$NGINX"
+sudo sed -i "/server_name*;/a \ \ \ \ location \/redirect_me {\n \ \ \ \ \ \ \ return 301 $DIR;\n \ \ \ \ \ }\n" "$NGINX"
 
 sudo nginx -t
 

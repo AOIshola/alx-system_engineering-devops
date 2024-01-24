@@ -11,6 +11,8 @@ sudo apt-get install -y nginx
 # appropriate content
 
 echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+echo "301 Moved Permanently" | sudo tee /var/www/html/redirect_me.html > /dev/null
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html > /dev/null
 
 echo "server {
 	listen 80;
@@ -28,15 +30,20 @@ DIR="/var/www/html/redirect_me.html"
 NGINX="/etc/nginx/sites-available/default"
 
 sudo cp "$NGINX" "$NGINX.bak"
-DIR_404="error_page 404 /custom_404.html\\
-	location = /custom_404.html {\\
-		internal;\\
-		root /var/www/html;\\
-		index index.html;\\
-		try_file $uri $uri/ /index.html;\\
-	}"
-sed -i "/server_name*;/a \ \ \ \ location \/redirect_me {\n \ \ \ \ \ \ \ return 301 $DIR;\n \ \ \ \ \ }\n" "$NGINX"
-sed -i "/server_name*;/i $DIR_404 $NGINX"
+
+sudo sed -i "/server_name.*;/i \\
+        error_page 404 /custom_404.html;\\
+        location = /custom_404.html {\\
+            internal;\\
+            root /var/www/html;\\
+            index index.html;\\
+            try_files \$uri \$uri/ /index.html;\\
+        }" "$NGINX"
+
+
+#sudo sed -i "/server_name*;/i \ \ \ \ error_page 404 \/custome_404.html;\n \ \ \ \ location = \/custom_404.html {\n \ \ \ \ \ \ \ \ internal;\n \ \ \ \ \ \ \ \ root \/var\/www\/html;\n \ \ \ \ \ \ \ \ index index.html;\n \ \ \ \ \ \ \ \ try_files $uri $uri\/ \/index.html;\n \ \ \ \ }\n" "$NGINX"
+
+sudo sed -i "/server_name*;/a \ \ \ \ location \/redirect_me {\n \ \ \ \ \ \ \ return 301 $DIR;\n \ \ \ \ \ }\n" "$NGINX"
 
 sudo nginx -t
 
