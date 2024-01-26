@@ -40,10 +40,7 @@ sudo sed -i "/server_name.*;/i \\
             try_files \$uri \$uri/ /index.html;\\
         }" "$NGINX"
 
-
-#sudo sed -i "/server_name*;/i \ \ \ \ error_page 404 \/custome_404.html;\n \ \ \ \ location = \/custom_404.html {\n \ \ \ \ \ \ \ \ internal;\n \ \ \ \ \ \ \ \ root \/var\/www\/html;\n \ \ \ \ \ \ \ \ index index.html;\n \ \ \ \ \ \ \ \ try_files $uri $uri\/ \/index.html;\n \ \ \ \ }\n" "$NGINX"
-
-sudo sed -i "/server_name*;/a \ \ \ \ location \/redirect_me {\n \ \ \ \ \ \ \ return 301 $DIR;\n \ \ \ \ \ }\n" "$NGINX"
+sudo sed -i "/server_name*;/i \ \ \ \ location \/redirect_me {\n \ \ \ \ \ \ \ return 301 $DIR;\n \ \ \ \ \ }\n" "$NGINX"
 
 sudo nginx -t
 

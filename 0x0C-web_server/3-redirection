@@ -30,7 +30,7 @@ NGINX="/etc/nginx/sites-available/default"
 
 sudo cp "$NGINX" "$NGINX.bak"
 
-sudo sed -i "/server_name*;/a \ \ \ \ location \/redirect_me {\n \ \ \ \ \ \ \ return 301 $DIR;\n \ \ \ \ \ }\n" "$NGINX"
+sudo sed -i "/server_name*;/i \ \ \ \ location \/redirect_me {\n \ \ \ \ \ \ \ return 301 $DIR;\n \ \ \ \ \ }\n" "$NGINX"
 
 sudo nginx -t
 
