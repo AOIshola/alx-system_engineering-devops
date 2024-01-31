@@ -24,4 +24,4 @@ backend backend
 	server 208065-web-02 100.26.216.44:80 check
 EOF
 
-sudo systemctl restart haproxy
+sudo service haproxy restart
