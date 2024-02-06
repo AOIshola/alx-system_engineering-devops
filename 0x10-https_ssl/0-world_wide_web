@@ -21,7 +21,7 @@ dig_domain()
 	else
 		ip=$(echo "$result" | awk '{print $5}')
 		record=$(echo "$result" | awk '{print $4}')
-		echo "The subdomain $2 is a '$record' record and points to '$ip'"
+		echo "The subdomain $2 is a $record record and points to $ip"
 	fi
 }
 
