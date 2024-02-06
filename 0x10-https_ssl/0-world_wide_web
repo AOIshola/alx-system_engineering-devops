@@ -1,0 +1,43 @@
+#!/bin/bash
+# Display information about subdomains
+
+#if [ $1 -eq $1 2> /dev/null ]; then
+#	echo "number"
+#else
+#	echo "not number"
+#fi
+
+#domain=$1
+dig_domain()
+{
+	if [ -z "$2" ]; then
+		domain="$1"
+	else
+		domain="$2.$1"
+	fi
+	result=$(dig "$domain" | grep -A1 "ANSWER SECTION" | awk "NR==2")
+	if [ -z "$result" ]; then
+		return 0
+	else
+		ip=$(echo "$result" | awk '{print $5}')
+		record=$(echo "$result" | awk '{print $4}')
+		echo "The subdomain $2 is a '$record' record and points to '$ip'"
+	fi
+}
+
+#dig_domain $1 $2
+
+main()
+{
+	sub_domains=("www" "lb-01" "web-01" "web-02")
+	if [ -z "$2" ]; then
+		for sub_domain in "${sub_domains[@]}"; do
+			dig_domain "$1" "$sub_domain"
+		done
+	else
+		dig_domain "$1" "$2"
+		return 0
+	fi
+}
+
+main $1 $2
