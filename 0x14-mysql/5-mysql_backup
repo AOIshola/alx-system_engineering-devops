@@ -8,7 +8,7 @@ fi
 
 dump_file="backup.sql"
 
-archive_name="$(date +'%d-%m-%y').tar.gz"
+archive_name="$(date +'%d-%m-%Y').tar.gz"
 
 mysqldump -u root -p'$1' --all-databases > $dump_file
 
