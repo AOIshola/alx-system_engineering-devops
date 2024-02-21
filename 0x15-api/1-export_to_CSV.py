@@ -11,14 +11,15 @@ if __name__ == "__main__":
 
     tasks = requests.get(url).json()
     users = requests.get(users_url).json()
-    uname = users[int(sys.argv[1]) - 1]["username"]
+    uname = users[int(sys.argv[1]) - 1]['username']
+    id = sys.argv[1]
 
     with open(f"{sys.argv[1]}.csv", mode="w") as f:
-        writer = csv.writer(f)
+        writer = csv.writer(f, quoting=csv.QUOTE_ALL)
         for task in tasks:
             if task["userId"] == int(sys.argv[1]):
                 writer.writerow(
-                        [str(sys.argv[1]),
+                        [id,
                             uname,
-                            task["completed"],
-                            task["title"]])
+                            task['completed'],
+                            task['title']])
