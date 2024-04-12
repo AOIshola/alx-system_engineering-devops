@@ -1,5 +1,8 @@
-import requests
+#!/usr/bin/python3
 """Recursive call"""
+
+import requests
+
 
 def recurse(subreddit, hot_list=[], after=None):
     """queries the Reddit API and returns a list containing
