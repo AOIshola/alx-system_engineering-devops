@@ -1,16 +1,15 @@
 # fix the webstack of Wordpress site server
-file {'/var/www/html/wp-settings.php':
-    ensure => file,
+
+$file='/var/www/html/wp-settings.php'
+$command='sed -i "s/phpp/php/"'
+
+exec { 'replace-phpp-with-php':
+    command => "${command} ${file}",
+    path    => ['/bin', '/usr/bin'],
+    onlyif  => 'find ${file}',
 }
 
-replace { 'wp-setting-php-typo':
-    target   => '/var/www/html/wp-settings.php',
-    regexp   => 'phpp',
-    replace  => 'php',
-    before   => File[''/var/www/html/wp-settings.php'],
-    provider => 'posix',
-}
-
-notify { 'Reload Apache':
-  exec => 'sudo /usr/sbin/service apache2 reload',
-}
+#exec { 'Reload Apache':
+  #command => 'sudo service apache reload',
+ # path    => ['/bin', '/usr/bin'],
+#}
