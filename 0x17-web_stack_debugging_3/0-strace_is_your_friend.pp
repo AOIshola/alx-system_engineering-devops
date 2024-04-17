@@ -1,3 +1,4 @@
+# fix the webstack of Wordpress site server
 file {'/var/www/html/wp-settings.php':
     ensure => file,
 }
