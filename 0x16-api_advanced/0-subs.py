@@ -3,6 +3,7 @@
 (not active users, total subscribers) for a given subreddit"""
 
 import requests
+import requests.auth
 
 
 def number_of_subscribers(subreddit):
@@ -11,8 +12,8 @@ def number_of_subscribers(subreddit):
     base_url = 'https://www.reddit.com/'
     data = {'grant_type': 'password', 'username': 'AOIshola',
             'password': 'fatimah5'}
-    auth = requests.auth.HTTPBasicAuth('9baZynf4FmoBRMSjRJgd6A',
-                                        '3maT1a4fbesYqv8ibXQEmCzttbdEtQ')
+    auth = requests.auth.HTTPBasicAuth(
+                '9baZynf4FmoBRMSjRJgd6A', '3maT1a4fbesYqv8ibXQEmCzttbdEtQ')
     res = requests.post(base_url + 'api/v1/access_token', data=data,
                         headers={'user-agent': 'alx-task by AOIshola'},
                         auth=auth)
