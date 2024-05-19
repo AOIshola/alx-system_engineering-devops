@@ -1,14 +1,11 @@
 #!/usr/bin/python3
-
-# """queries the Reddit API and returns the number of subscribers
-# (not active users, total subscribers) for a given subreddit"""
+"""queries the Reddit API and returns the number of subscribers
+(not active users, total subscribers) for a given subreddit"""
 
 import requests
 
-
 def number_of_subscribers(subreddit):
     """retrieves the number of subscribers in a subreddit"""
-#     url = f"https://www.reddit.com/r/{subreddit}/about.json"
     import requests.auth
 
     base_url = 'https://www.reddit.com/'
@@ -17,12 +14,12 @@ def number_of_subscribers(subreddit):
     res = requests.post(base_url + 'api/v1/access_token', data=data, headers={'user-agent': 'alx-task by AOIshola'}, auth=auth)
 
     data = res.json()
-    # print(data)
     token = 'bearer ' + data['access_token']
 
     api_url = 'https://oauth.reddit.com'
     headers = {'Authorization': token, 'user-agent': 'alx-task by AOIshola'}
-    response = requests.get(api_url + f'/r/{subreddit}/about', headers=headers, allow_redirects=False)
+    response = requests.get(api_url + f'/r/{subreddit}/about', headers=headers,
+                            allow_redirects=False)
 
     if response.status_code == 200:
         return (response.json()['data']['subscribers'])
@@ -38,6 +35,7 @@ def number_of_subscribers(subreddit):
 #     else:
 #         return 0
 
+# using praw
     # import praw
 
     # r = praw.Reddit(client_id = 'ci3jQyOGUKErBgwpDcizOQ',
